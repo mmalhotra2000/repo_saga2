@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: shipping-service
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: momalhotra
+Built-By: mohitmalhotra
 Implementation-Vendor-Id: com.progressivecoder.ordermanagement
-Build-Jdk: 1.8.0_121
+Build-Jdk: 1.8.0_171
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/shipping-service
 Created-By: Maven Integration for Eclipse
