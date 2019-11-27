@@ -11,7 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.progressivecoder.ordermanagement</groupId>
+    <groupId>com.assignment.ordermanagement</groupId>
     <artifactId>shipping-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>shipping-service</name>
@@ -62,7 +62,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.progressivecoder.saga-pattern</groupId>
+            <groupId>com.assignment.saga-pattern</groupId>
             <artifactId>core-apis</artifactId>
             <version>${project.version}</version>
         </dependency>

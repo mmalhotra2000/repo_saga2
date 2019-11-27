@@ -1,0 +1,8 @@
+com/assignment/ecommerce/events/OrderUpdatedEvent.class
+com/assignment/ecommerce/events/OrderShippedEvent.class
+com/assignment/ecommerce/commands/CreateInvoiceCommand.class
+com/assignment/ecommerce/commands/UpdateOrderStatusCommand.class
+com/assignment/ecommerce/commands/CreateShippingCommand.class
+com/assignment/ecommerce/commands/CreateOrderCommand.class
+com/assignment/ecommerce/events/InvoiceCreatedEvent.class
+com/assignment/ecommerce/events/OrderCreatedEvent.class

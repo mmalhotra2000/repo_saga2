@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Implementation-Title: shipping-service
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: mohitmalhotra
-Implementation-Vendor-Id: com.progressivecoder.ordermanagement
+Implementation-Vendor-Id: com.assignment.ordermanagement
 Build-Jdk: 1.8.0_171
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/shipping-service
