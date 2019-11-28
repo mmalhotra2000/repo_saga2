@@ -22,44 +22,49 @@ import com.assignment.ordermanagement.orderservice.aggregates.OrderStatus;
 @Saga
 public class OrderManagementSaga {
 
-    @Inject
-    private transient CommandGateway commandGateway;
+	@Inject
+	private transient CommandGateway commandGateway;
 
-    @StartSaga
-    @SagaEventHandler(associationProperty = "orderId")
-    public void handle(OrderCreatedEvent orderCreatedEvent){
-        String paymentId = UUID.randomUUID().toString();
-        System.out.println("Saga invoked");
 
-        //associate Saga
-        SagaLifecycle.associateWith("paymentId", paymentId);
+	@StartSaga
+	@SagaEventHandler(associationProperty = "orderId")
+	public void handle(OrderCreatedEvent orderCreatedEvent) {
+		String paymentId = UUID.randomUUID().toString();
+		System.out.println("Saga invoked");
 
-        System.out.println("order id" + orderCreatedEvent.orderId);
+		// associate Saga
+		SagaLifecycle.associateWith("paymentId", paymentId);
 
-        //send the commands
-        commandGateway.send(new CreateInvoiceCommand(paymentId, orderCreatedEvent.orderId));
-    }
+		System.out.println("order id" + orderCreatedEvent.orderId);
 
-    @SagaEventHandler(associationProperty = "paymentId")
-    public void handle(InvoiceCreatedEvent invoiceCreatedEvent){
-        String shippingId = UUID.randomUUID().toString();
 
-        System.out.println("Saga continued");
+		// send the commands
+		commandGateway.send(new CreateInvoiceCommand(paymentId, orderCreatedEvent.orderId));
+		
+	}
 
-        //associate Saga with shipping
-        SagaLifecycle.associateWith("shipping", shippingId);
+	@SagaEventHandler(associationProperty = "paymentId")
+	public void handle(InvoiceCreatedEvent invoiceCreatedEvent) {
+		String shippingId = UUID.randomUUID().toString();
 
-        //send the create shipping command
-        commandGateway.send(new CreateShippingCommand(shippingId, invoiceCreatedEvent.orderId, invoiceCreatedEvent.paymentId));
-    }
+		System.out.println("Saga continued");
 
-    @SagaEventHandler(associationProperty = "orderId")
-    public void handle(OrderShippedEvent orderShippedEvent){
-        commandGateway.send(new UpdateOrderStatusCommand(orderShippedEvent.orderId, String.valueOf(OrderStatus.SHIPPED)));
-    }
+		// associate Saga with shipping
+		SagaLifecycle.associateWith("shipping", shippingId);
 
-    @SagaEventHandler(associationProperty = "orderId")
-    public void handle(OrderUpdatedEvent orderUpdatedEvent){
-        SagaLifecycle.end();
-    }
+		// send the create shipping command
+		commandGateway.send(
+				new CreateShippingCommand(shippingId, invoiceCreatedEvent.orderId, invoiceCreatedEvent.paymentId));
+	}
+
+	@SagaEventHandler(associationProperty = "orderId")
+	public void handle(OrderShippedEvent orderShippedEvent) {
+		commandGateway
+				.send(new UpdateOrderStatusCommand(orderShippedEvent.orderId, String.valueOf(OrderStatus.SHIPPED)));
+	}
+
+	@SagaEventHandler(associationProperty = "orderId")
+	public void handle(OrderUpdatedEvent orderUpdatedEvent) {
+		SagaLifecycle.end();
+	}
 }
